@@ -1,14 +1,8 @@
-// src/index.js
-import "./styles.css";
-import "./modal-styles.css";
-import loadIndex from "./loadindex.js"
+// src/tasks.js
 import loadTesting from "./testing.js";
-import loadTasks from "./tasks.js";
-import loadInbox from "./inbox.js";
+import { greeting } from "./greeting.js";
+console.log(greeting);
 import { storageModule } from "./localStorageModule.js";
-import { Task, Project } from "./elements.js";
-// Import specific functions from the dom-utils module
-import { select, selectAll, createElement, setText, appendChild, addClass } from './elements.js';
 
 import {
   startOfToday,
@@ -25,79 +19,100 @@ import {
 
 
 
-import { greeting } from "./greeting.js";
-console.log(greeting);
 
-
-/*window.addEventListener("click", (e) => {
-    if (e.target == modal) {
-        modal.style.display = "none";
-    };
-});
-
-span.addEventListener("click",  () => {
-    modal.style.display = "none";
-});
-
-addTask.addEventListener("click", () => {
-    modal.style.display = "block";
-    document.querySelector(".form-title").textContent = "Add Task";
-    document.querySelector(".task-add-button").textContent = "Add";
-});
-*/
+const contentDiv = document.querySelector(".main-content");
 
 
 
+export default function loadTasks() {
 
-let myList = [];
+    alert("In the Tasks Page Tab Thing now");
 
-const taskZero = new Task("iTask 0", "Desc 0", "Pri 3", new Date(2025, 3, 20), false, "checklit 0", "Notes 0");
-const taskOne = new Task("Task 1", "Desc 1", "Pri 1", new Date(2025, 5, 25), false, "checklit 1", "Notes 1");
-const taskTwo = new Task("Task 2", "Desc 2", "Pri 2", new Date(2025, 7, 4), false, "checklit 2", "Notes 2");
-const taskThree = new Task("Task 3", "Desc 3", "Pri 3", new Date(2025, 10, 11), false, "checklit 3", "Notes 3");
+    //
+    // Start page HTML set up area
+    //
+    const container = document.createElement("div");
+    container.classList.add("container");
 
-myList.push(taskZero);
-myList.push(taskOne);
-myList.push(taskTwo);
-myList.push(taskThree);
+    const todosApp = document.createElement("div");
+    todosApp.classList.add("todos-app");
+    container.appendChild(todosApp);
+    const hdrText = document.createElement("h1");
+    hdrText.innerText = "To Do App / Task List";
+    todosApp.appendChild(hdrText);
 
-storageModule.setItem('indexTasks', myList);
+    const statContainer = document.createElement("div");
+    statContainer.classList.add("stat-container");
+    todosApp.appendChild(statContainer);
+
+    const detailsDiv = document.createElement("div");
+    detailsDiv.classList.add("details");
+    statContainer.appendChild(detailsDiv);
+
+    const hdrProgress = document.createElement("h3");
+    hdrProgress.innerText = "Progress / Details";
+    detailsDiv.appendChild(hdrProgress);
+
+    const progressBarDiv = document.createElement("div");
+    progressBarDiv.id = "progressbar";
+    detailsDiv.appendChild(progressBarDiv);
+
+    const progress = document.createElement("div");
+    progress.id = "progress";
+    progressBarDiv.appendChild(progress);
+
+    const statsNumber = document.createElement("div");
+    statsNumber.classList.add("stats-number");
+    statContainer.appendChild(statsNumber);
+
+    const numbers = document.createElement("p");
+    numbers.id = "numbers";
+    statsNumber.appendChild(numbers);
+
+    // Create Form for Add Task
+    const formArea = document.createElement("form");
+    formArea.classList.add("input-area");
+    todosApp.appendChild(formArea);
+
+    const inputText = document.createElement("input");
+    inputText.id = "task-input";
+    inputText.setAttribute('type', 'text');
+    inputText.setAttribute('placeholder', 'Add a New Task');
+    
+    const inputSubmit = document.createElement("button");
+    inputSubmit.id = "add-task-button";
+    inputSubmit.setAttribute('type', 'submit');
+    const iconElement = document.createElement('i');
+    iconElement.className = 'fa-solid fa-plus';
+    inputSubmit.appendChild(iconElement);
+
+    formArea.appendChild(inputText);
+    formArea.appendChild(inputSubmit);
+
+    const todosCont = document.createElement("div");
+    todosCont.classList.add("todos-container");
+    todosApp.appendChild(todosCont);
+
+    const list = document.createElement('ul');
+    list.id = "task-list";
+    todosCont.appendChild(list);
+
+    const empImg = document.createElement("img");
+    empImg.src = "../src/images/empty-icon.jpg";
+    empImg.classList.add("empty-image");
+    empImg.setAttribute('width', "100px");
+    empImg.setAttribute('height', '100px');
+    todosCont.appendChild(empImg);
+
+    contentDiv.appendChild(container);
+
+    //
+    // END HTML set up area
+    // ( I think)
 
 
-const homeButton = document.getElementById("home-Btn");
-homeButton.addEventListener("click", () => {
-    clearContent();
-    loadIndex();
-});
-
-const testingButton = document.getElementById("test-Btn");
-testingButton.addEventListener("click", () => {
-    clearContent();
-    loadTesting();
-});
-
-const taskButton = document.getElementById("task-Btn");
-taskButton.addEventListener("click", () => {
-    clearContent();
-    loadTasks();
-});
-
-const inboxButton = document.getElementById("inbox-Btn");
-inboxButton.addEventListener("click", () => {
-    clearContent();
-    loadInbox();
-});
-
-function clearContent() {
-    const contentBox = document.querySelector(".main-content");
-    contentBox.replaceChildren();
-    return;
-};
-
-/*
-document.addEventListener('DOMContentLoaded', () => {
     const taskInput = document.getElementById('task-input');
-    const addTaskBtn = document.getElementById('add-task-btn');
+    const addTaskBtn = document.getElementById('add-task-button');
     const taskList = document.getElementById('task-list');
     const emptyImage = document.querySelector('.empty-image');
     const todosContainer = document.querySelector('.todos-container');
@@ -198,7 +213,13 @@ document.addEventListener('DOMContentLoaded', () => {
         saveTaskToLocalStorage();
     };
 
-    addTaskBtn.addEventListener('click', () => addTask());
+    addTaskBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        addTask();
+    });
+
+
+
     taskInput.addEventListener('keypress', (e) => {
         if (e.key === 'Enter') {
             e.preventDefault();
@@ -208,9 +229,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     loadTasksFromLocalStorage();
 
-});
 
-*/
+};
 
-loadIndex();
-//console.log(myList);
+

@@ -4,9 +4,138 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
 </head>
 <body>
-    
+    <div class="master">
+
+        <div class="left-side">
+
+            <div class="user-area">
+                <img src="./icons/avatar.png" width="50px" height="50px" id="user-icon-id" class="user-icon-class">
+            
+                <select name="user-drop-down" id="user-drop-down" class="user-drop-down-class">
+                <option value="shad">Shad</option>
+                <option value="user2">User2</option>
+                <option value="user3">User3</option>
+                </select>
+
+            </div>
+                        
+            <hr class="h-line"></hr>
+
+            <div class="drawer">
+                
+                <div class="dashboard">
+
+
+                    <div class="home menu-item">
+                        <button id="home-Btn"><i class="fa-regular fa-house"></i></button>
+                        <h4 class="btn-text">Home</h4>
+                    </div>
+
+                    <div class="new-tasks menu-item">
+                        <button id="task-Btn" class="add-task"><i class="fa-solid fa-plus"></i></button>
+                        <h4 class="btn-text">NEW Add Task</h4>
+                    </div>
+                     
+                    <div class="new-project menu-item">
+                        <button id="proj-Btn" class="add-project"><i class="fa-solid fa-plus"></i></button>
+                        <h4 class="btn-text">NEW Add Project</h4>
+                    </div>
+
+                    <div class="testing menu-item">
+                        <button id="test-Btn"><i class="fa-solid fa-flask-vial"></i></button>
+                        <h4 class="btn-text">Testing Page</h4>
+                    </div>    
+
+                    <div class="search menu-item">
+                        <button id="search-Btn"><i class="fa-solid fa-magnifying-glass"></i></button>
+                        <h4 class="btn-text">Search by Date</h4>
+                    </div>
+
+                    <div class="inbox menu-item">
+                        <button id="inbox-Btn"><i class="fa-solid fa-inbox"></i></button>
+                        <h4 class="btn-text">Inbox / All Tasks</h4>
+                    </div>
+
+                   
+
+                </div>
+
+            </div>
+
+
+            <div class="my-projects-area">
+                <img src="./icons/avatar.png" width="40px" height="40px" id="user-projects-icon-id" class="user-projects-icon-class">
+            
+                <h3>My Projects</h3>
+            </div>
+            
+            <div id="new-project-input" class="input-area">
+                <input type="text" placeholder="New Project..." id="project-name-input"/>
+                <button id="addProjectBtn" class="add-project-btn-class"></button>
+            </div>
+            <div id="main-project-container" class="main-project-container-class">
+                <div id="project-list" class="project-list-class"></div>
+            </div>
+
+            <div class="project-drop-area">
+                <select name="project-drop-down" id="project-drop-down" class="project-drop-down-class">
+                <option value="default">Default Project</option>
+                <option value="proj2">Proj 2</option>
+                <option value="proj3">Proj 3</option>
+                </select>
+            </div>
+
+            <div class="projects-list-area"> 
+            </div>
+            
+        </div>
+
+        <div class="main-content">
+            <div id="container" class="container"></div>
+        </div>
+    </div>
+
+
+    <div class="modal" id="modal">
+      <div class="modal-content">
+        <span class="close">&times;</span>
+        <div class="modal-form">
+          <h1 class="form-title"></h1>
+          <form class="add-project-form">
+            <div class="modal-input-field">
+              <label for="project-title">Project Name:</label>
+              <input
+                type="text"
+                name="project-title"
+                id="project-title"
+                class="modal-form-input"
+              />
+            </div>
+            <div class="modal-input-field">
+              <label for="project-id">ID:</label>
+              <input
+                type="number"
+                min="0"
+                name="project-id"
+                id="project-id"
+                class="modal-form-input"
+              />
+            </div>
+            
+            <div class="submit-modal-form">
+              <button type="submit" class="btn form-add-button"></button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
 </body>
 </html>
+
 
